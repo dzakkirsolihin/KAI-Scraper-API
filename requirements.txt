@@ -27,3 +27,10 @@ python-json-logger # Opsional, jika memilih logger ini
 # --- Fase 2 Additions ---
 # Penjadwalan Tugas Latar Belakang
 apscheduler
+
+# --- Fase 3 Additions ---
+# Rate Limiting
+slowapi
+
+# Production Server (untuk Docker)
+gunicorn

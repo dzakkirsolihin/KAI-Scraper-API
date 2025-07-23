@@ -8,6 +8,7 @@ Sebuah API tidak resmi yang andal dan cepat untuk melakukan scraping jadwal kere
 
 ---
 
+
 ## ✨ Fitur Utama
 
 - **Pencarian Jadwal**: Temukan jadwal kereta api berdasarkan stasiun asal, tujuan, dan tanggal.
@@ -17,40 +18,48 @@ Sebuah API tidak resmi yang andal dan cepat untuk melakukan scraping jadwal kere
 - **Validasi Input**: Validasi kode stasiun di awal untuk respons error yang cepat dan efisien.
 - **Dokumentasi Interaktif**: Dokumentasi API yang digenerate secara otomatis dan interaktif menggunakan Swagger UI.
 - **Logging Terstruktur**: Output log dalam format JSON dengan `request_id` untuk kemudahan debugging dan monitoring.
+- **�️ Rate Limiting**: Melindungi API dari penyalahgunaan dengan batas permintaan 30 kali per menit.
+- **📦 Siap Produksi dengan Docker**: Dilengkapi dengan `Dockerfile` dan `docker-compose.yml` untuk deployment yang mudah dan konsisten.
 
-## 🚀 Instalasi & Menjalankan Lokal
 
-Pastikan Anda memiliki Python 3.10 atau yang lebih baru.
+## 🚀 Menjalankan dengan Docker (Direkomendasikan)
 
-1.  **Clone repository ini:**
+Cara termudah dan paling konsisten untuk menjalankan API ini adalah menggunakan Docker.
+
+1.  **Prasyarat:** Pastikan Anda telah menginstal [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
+2.  **Clone repository ini:**
     ```bash
     git clone https://github.com/dzakwanalifi/kai-scraper-api.git
     cd kai-scraper-api
     ```
 
-2.  **Buat dan aktifkan virtual environment:**
+3.  **Bangun dan Jalankan Container:**
+    Dari direktori root proyek, jalankan perintah berikut:
     ```bash
-    python -m venv venv
-    # Windows
-    .\venv\Scripts\activate
-    # macOS/Linux
-    source venv/bin/activate
+    docker-compose up --build
+    ```
+    Perintah ini akan membangun Docker image dan menjalankan container di latar belakang.
+
+4.  **Akses API:**
+    - Buka browser Anda dan pergi ke `http://localhost:8000`.
+    - Untuk melihat dokumentasi interaktif, buka `http://localhost:8000/docs`.
+
+5.  **Untuk Menghentikan:**
+    Tekan `Ctrl + C` di terminal, lalu jalankan:
+    ```bash
+    docker-compose down
     ```
 
-3.  **Install dependensi:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+### Menjalankan Secara Lokal (Tanpa Docker)
 
-4.  **Jalankan server API:**
+Jika Anda tidak ingin menggunakan Docker, Anda masih bisa menjalankannya secara lokal.
+
+1.  Ikuti langkah-langkah instalasi virtual environment dan `pip install -r requirements.txt` seperti biasa.
+2.  Jalankan server development:
     ```bash
     uvicorn main:app --reload
     ```
-    Opsi `--reload` akan membuat server otomatis restart setiap kali Anda mengubah kode.
-
-5.  **Akses API:**
-    - Buka browser Anda dan pergi ke `http://127.0.0.1:8000`.
-    - Untuk melihat dokumentasi interaktif, buka `http://127.0.0.1:8000/docs`.
 
 ## ⚙️ Endpoint API
 

@@ -14,7 +14,13 @@ from kai_scraper import KAIScraper
 from utils import format_date_for_kai
 from station_manager import station_manager
 
-# Inisialisasi logging dan logger utama
+
+# Rate Limiting
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
+from slowapi import _rate_limit_exceeded_handler
+from limiter import limiter
+
 setup_logging(log_level=settings.LOG_LEVEL)
 logger = structlog.get_logger(__name__)
 
@@ -60,6 +66,7 @@ Dibuat dengan FastAPI, Cloudscraper, dan Structlog.
 # ====================
 # Inisialisasi FastAPI
 # ====================
+
 app = FastAPI(
     title="KAI Scraper API",
     description=api_description,
@@ -74,6 +81,10 @@ app = FastAPI(
         "url": "https://opensource.org/licenses/MIT",
     },
 )
+
+# Integrasi slowapi limiter
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # ====================
 # Event Handler untuk scheduler update stasiun
@@ -158,6 +169,7 @@ async def validate_station_codes(origin: str, destination: str):
 # ====================
 # Endpoint: /search (cari jadwal kereta)
 # ====================
+
 @app.get(
     "/search",
     response_model=List[Schedule],
@@ -171,6 +183,7 @@ async def validate_station_codes(origin: str, destination: str):
         422: {"description": "Error validasi (misal: format tanggal salah)."},
     }
 )
+@limiter.limit("30/minute")
 async def search_tickets(
     response: Response,
     request: Request,
