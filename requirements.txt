@@ -1,0 +1,29 @@
+# requirements.txt (UPDATED)
+
+# Web Framework
+fastapi
+uvicorn[standard]
+
+# HTTP Client & Parser
+cloudscraper
+beautifulsoup4
+lxml
+
+# Testing Framework
+pytest
+requests
+
+# --- Fase 1 Additions ---
+# Konfigurasi
+pydantic-settings
+
+# Caching
+cachetools
+
+# Logging Terstruktur
+structlog
+python-json-logger # Opsional, jika memilih logger ini
+
+# --- Fase 2 Additions ---
+# Penjadwalan Tugas Latar Belakang
+apscheduler

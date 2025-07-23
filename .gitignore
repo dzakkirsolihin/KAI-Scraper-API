@@ -1,0 +1,37 @@
+# .gitignore untuk proyek KAI Scraper
+
+# Byte-compiled / cache / temp files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# VSCode settings
+.vscode/
+
+# Environment files
+.env
+
+# Log files
+*.log
+
+# Cache dan data runtime
+.cache/
+.cache
+*.db
+*.sqlite3
+
+# File data hasil scraping atau backup
+stations.json
+
+# File sementara OS
+.DS_Store
+Thumbs.db
+
+# File testing
+.coverage
+htmlcov/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
